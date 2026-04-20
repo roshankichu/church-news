@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>സഭാ വാർത്ത | Sabha Vartha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-top">
+      <div class="cross-emblem">✝</div>
+      <div class="header-text">
+        <h1 class="site-title">സഭാ വാർത്ത</h1>
+        <p class="site-subtitle">Sabha Vartha — Church News</p>
+      </div>
+      <button class="login-btn" onclick="openLogin()">
+        <span class="lock-icon">🔐</span> Admin Login
+      </button>
+    </div>
+    <nav class="main-nav">
+      <a href="#" class="nav-link active">Home</a>
+      <a href="#" class="nav-link">Parish News</a>
+      <a href="#" class="nav-link">Events</a>
+      <a href="#" class="nav-link">Announcements</a>
+      <a href="#" class="nav-link">Gallery</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-cross">✝</div>
+      <h2 class="hero-title">ദൈവ വചനം — ജീവന്റെ വഴി</h2>
+      <p class="hero-subtitle">The Word of God — The Way of Life</p>
+      <div class="hero-divider"></div>
+      <p class="hero-verse">"കർത്താവ് എന്റെ ആട്ടിടയൻ; എനിക്ക് ഒന്നിനും കുറവില്ല"</p>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- Breaking News Ticker -->
+  <div class="news-ticker">
+    <div class="ticker-label">📢 Latest</div>
+    <div class="ticker-track">
+      <div class="ticker-content" id="tickerContent">
+        Loading latest news...
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Featured News -->
+    <section class="section-featured">
+      <div class="section-header">
+        <h2 class="section-title">Featured News <span>പ്രധാന വാർത്ത</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="news-grid" id="newsGrid">
+        <!-- News cards rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Sidebar Quote -->
+    <aside class="sidebar-quote">
+      <div class="quote-card">
+        <div class="quote-cross">✝</div>
+        <p class="quote-text">"For God so loved the world that he gave his one and only Son"</p>
+        <span class="quote-ref">John 3:16</span>
+      </div>
+      <div class="quote-card">
+        <div class="quote-cross">✝</div>
+        <p class="quote-text">"I can do all things through Christ who strengthens me"</p>
+        <span class="quote-ref">Philippians 4:13</span>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-cross">✝</div>
+    <p class="footer-title">സഭാ വാർത്ത</p>
+    <p class="footer-sub">Sharing the Good News • സുവിശേഷം പങ്കുവയ്ക്കുന്നു</p>
+    <p class="footer-copy">© 2025 Sabha Vartha. Built with faith & love. 🙏</p>
+  </footer>
+
+  <!-- ======= NEWS DETAIL OVERLAY ======= -->
+  <div class="news-overlay" id="newsOverlay" onclick="closeNews(event)">
+    <div class="news-detail-card" id="newsDetailCard">
+      <button class="close-btn" onclick="closeNewsDetail()">✕</button>
+      <div class="news-detail-img-wrap">
+        <img src="" alt="" id="detailImg" class="news-detail-img"/>
+        <div class="detail-img-overlay"></div>
+        <h1 class="detail-title" id="detailTitle"></h1>
+      </div>
+      <div class="detail-body">
+        <div class="detail-meta">
+          <span class="detail-category" id="detailCategory"></span>
+          <span class="detail-date" id="detailDate"></span>
+        </div>
+        <div class="detail-content" id="detailContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= LOGIN MODAL ======= -->
+  <div class="modal-overlay" id="loginModal" onclick="closeLoginOutside(event)">
+    <div class="login-card">
+      <div class="login-cross">✝</div>
+      <h2 class="login-title">Admin Login</h2>
+      <p class="login-subtitle">സഭാ വാർത്ത Administration</p>
+      <div class="login-form">
+        <div class="input-group">
+          <label>Username</label>
+          <input type="text" id="loginUser" placeholder="Enter username" />
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="loginPass" placeholder="Enter password" />
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <button class="login-submit-btn" onclick="doLogin()">Login ✝</button>
+        <button class="login-cancel-btn" onclick="closeLogin()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= ADMIN PANEL ======= -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-header">
+      <div class="admin-title">
+        <span>✝</span> Admin Panel — സഭാ വാർത്ത
+      </div>
+      <button class="admin-logout" onclick="doLogout()">Logout</button>
+    </div>
+
+    <!-- Add News Form -->
+    <div class="admin-section">
+      <h3 class="admin-section-title">➕ Add New News</h3>
+      <div class="admin-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Title (Malayalam / English)</label>
+            <input type="text" id="newTitle" placeholder="വാർത്ത തലക്കെട്ട്..." />
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="newCategory">
+              <option value="Parish News">Parish News</option>
+              <option value="Events">Events</option>
+              <option value="Announcement">Announcement</option>
+              <option value="Youth">Youth</option>
+              <option value="Mission">Mission</option>
+              <option value="Prayer">Prayer</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Image URL (Paste any image link)</label>
+          <input type="text" id="newImage" placeholder="https://example.com/image.jpg" />
+        </div>
+        <div class="form-group">
+          <label>Short Summary (for card)</label>
+          <textarea id="newSummary" rows="2" placeholder="Brief summary..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Full News Content</label>
+          <textarea id="newContent" rows="6" placeholder="Full news description in Malayalam or English..."></textarea>
+        </div>
+        <button class="admin-btn-add" onclick="addNews()">✝ Publish News</button>
+      </div>
+    </div>
+
+    <!-- Manage News -->
+    <div class="admin-section">
+      <h3 class="admin-section-title">📰 Manage News</h3>
+      <div class="admin-news-list" id="adminNewsList"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
